@@ -1,0 +1,46 @@
+header {
+	padding: 10px;
+	background: rgb(223, 119, 2);
+	box-shadow: 5px 5px 5px #575757;
+	z-index: 1000;
+	position: relative;
+	width: 100%;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-evenly;
+}
+header span img {
+	width: 100px;
+}
+
+header span h1 {
+	font-size: 30px;
+	color: white;
+	font-family: 'Dancing Script', cursive;
+}
+.addSign {
+	cursor: pointer;
+	transition: ease-in-out 0.5s;
+}
+.addSign img {
+	margin-top: -50px;
+
+	width: 30px;
+}
+.addSign:hover {
+	transform: scale(1.1);
+	transition: ease-in-out 0.5s;
+}
+
+@media (min-width: 1024px) {
+	header h1 {
+		font-size: 70px;
+	}
+	header span img {
+		width: 100px;
+	}
+	.addSign img {
+		width: 50px;
+		margin-left: 200px;
+	}
+}

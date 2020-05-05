@@ -1,0 +1,48 @@
+.container {
+	display: flex;
+	flex-wrap: wrap;
+	width: 100%;
+	overflow-x: hidden;
+}
+.notesList {
+	width: 100%;
+}
+.folders {
+	padding-top: 40px;
+	background-color: #9e9e9e;
+	width: 100%;
+	height: auto;
+	box-shadow: 2px 2px 2px #1616169a;
+	min-width: 300px;
+}
+
+.btn-addFolder {
+	background: linear-gradient(315deg, #8e8e8e, #a9a9a9);
+	box-shadow: -20px -20px 60px #868686, 20px 20px 60px #b6b6b6;
+	padding: 1px 20px;
+	width: 200px;
+	height: 70px;
+	border-radius: 10px;
+	text-align: center;
+	margin: 20px auto;
+	cursor: pointer;
+	transition: ease-in-out 0.5s;
+}
+
+.btn-addFolder:hover {
+	color: white;
+	background: rgb(223, 119, 2);
+	transition: ease-in-out 0.5s;
+	border: 2px solid rgb(223, 119, 2);
+}
+@media (min-width: 1024px) {
+	.folders {
+		width: 20%;
+		min-height: 100vh;
+		height: auto;
+	}
+	.notesList {
+		width: 70%;
+		margin: 0 50px;
+	}
+}

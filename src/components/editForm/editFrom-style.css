@@ -1,0 +1,54 @@
+.editNotes {
+	position: absolute;
+	background: rgb(224, 224, 224);
+	top: 40%;
+	left: 50%;
+	width: 500px;
+	height: 600px;
+	padding: 30px 10px;
+	border-radius: 10px;
+	box-shadow: 5px 5px 5px #6e6e6e;
+}
+#noteTitle {
+	display: block;
+	margin: 0 auto;
+	padding: 10px 5px;
+	font-size: 20px;
+	font-weight: bolder;
+	border: none;
+	outline: none;
+	text-align: center;
+	border-radius: 10px;
+}
+.editNotes textarea {
+	width: 470px;
+	height: 400px;
+	display: block;
+	padding: 10px;
+	margin: 10px auto;
+	outline: none;
+	border: none;
+}
+.editNotes .btn-save {
+	width: 100px;
+	height: 40px;
+	display: block;
+	margin: 10px auto;
+	outline: none;
+	border: none;
+	border-radius: 10px;
+	background: white;
+	font-weight: bold;
+}
+.editNotes #btn-cancel {
+	width: 100px;
+	height: 40px;
+	display: block;
+	margin: 10px auto;
+	padding: 10px 25px;
+	background: white;
+	outline: none;
+	border: none;
+	font-weight: bold;
+	border-radius: 10px;
+}

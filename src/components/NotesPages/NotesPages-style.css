@@ -1,0 +1,77 @@
+.notes {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	padding: 20px;
+	width: 100%;
+	min-width: 200px;
+	margin: 50px auto;
+	transition: ease-in-out 0.5s;
+	cursor: pointer;
+	border-radius: 30px;
+	background: #ffffff;
+	box-shadow: 20px 20px 60px #d9d9d9, -20px -20px 60px #ffffff;
+}
+.notes:hover {
+	transform: scale(1.08);
+	transition: ease-in-out 0.5s;
+}
+.notes h2 {
+	text-align: left;
+	padding-bottom: 30px;
+}
+.notes div {
+	padding-bottom: 10px;
+}
+.info {
+	width: 70%;
+}
+.btn-Group {
+	display: flex;
+	flex-wrap: wrap;
+
+	width: 30%;
+	min-width: 270px;
+}
+.btn-Group .btn-Delete {
+	float: right;
+	height: 50px;
+	padding: 10px;
+	background: #ffffff;
+	box-shadow: 20px 20px 60px #d9d9d9, -20px -20px 60px #ffffff;
+	outline: none;
+	cursor: pointer;
+	transition: ease-in-out 0.25s;
+	border-radius: 5px;
+	font-weight: bold;
+}
+.btn-Group .btn-Delete:hover {
+	transform: scale(1.1);
+	background-color: rgba(224, 35, 35, 0.924);
+	border: 2px solid rgba(224, 35, 35, 0.924);
+	color: white;
+	transition: ease-in-out 0.25s;
+}
+.btn-Group .btn-Edit {
+	width: 25%;
+	min-width: 60px;
+	max-width: 90px;
+	height: 50px;
+	max-width: 100px;
+	float: right;
+	background-color: hsl(0, 0%, 100%);
+	border: none;
+	outline: none;
+	cursor: pointer;
+	padding: 0 5px;
+	margin-right: 5px;
+	transition: ease-in-out 0.25s;
+}
+.btn-Group .btn-Edit img {
+	width: 70%;
+	margin-top: -10px;
+}
+.btn-Group .btn-Edit:hover {
+	transform: scale(1.15);
+	transition: ease-in-out 0.25s;
+}

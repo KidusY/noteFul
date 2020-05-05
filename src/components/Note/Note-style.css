@@ -1,0 +1,69 @@
+.btn-back {
+	margin: 20px;
+	background: #fbfbfb;
+	box-shadow: 20px 20px 60px #d9d9d9, -20px -20px 60px #ffffff;
+	width: 150px;
+	height: 50px;
+	text-align: center;
+	padding: 0 20px;
+	transition: ease-in-out 0.5s;
+	cursor: pointer;
+	border-radius: 10px;
+	line-height: 10px;
+}
+.btn-back:hover {
+	transform: scale(1.1);
+	transition: ease-in-out 0.5s;
+}
+.notesHeader {
+	width: 80%;
+	margin: 0 auto;
+}
+.notesHeader .notesInfo {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-between;
+	padding: 20px;
+	width: 100%;
+	min-width: 200px;
+	margin: 50px auto;
+	transition: ease-in-out 0.5s;
+	cursor: pointer;
+	border-radius: 30px;
+	background: #ffffff;
+	box-shadow: 20px 20px 60px #d9d9d9, -20px -20px 60px #ffffff;
+}
+.notesHeader .btn-Delete {
+	float: right;
+	padding: 10px 20px;
+	border: 2px solid #111111;
+	outline: none;
+	cursor: pointer;
+	transition: ease-in-out 0.25s;
+	border-radius: 5px;
+}
+.notesHeader .btn-Delete:hover {
+	transform: scale(1.1);
+	background-color: rgba(224, 35, 35, 0.924);
+	border: 2px solid rgba(224, 35, 35, 0.924);
+	color: white;
+	transition: ease-in-out 0.25s;
+}
+.notesHeader .btn-Edit {
+	width: 100px;
+	background-color: white;
+	margin-right: 10px;
+	border: none;
+	outline: none;
+	cursor: pointer;
+	padding: 0 20px;
+	transition: ease-in-out 0.25s;
+}
+.notesHeader .btn-Edit:hover {
+	transform: scale(1.15);
+	transition: ease-in-out 0.25s;
+}
+.notesHeader .btn-Edit img {
+	width: 100%;
+	margin-top: -15px;
+}
