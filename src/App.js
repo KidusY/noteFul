@@ -41,9 +41,9 @@ class App extends React.Component {
 					throw new Error('No file found');
 				}
 			})
-			.then((res) => {
+			.then((res) => {				
 				noteStoreTemp.folders = res;
-				this.setState({ store: noteStoreTemp, folderId: res[res.length - 1].id });
+				this.setState({ store: noteStoreTemp });
 			})
 			.catch((err) => console.log('Folder', err));
 		fetch(`${url}/notes`)
@@ -57,7 +57,7 @@ class App extends React.Component {
 			})
 			.then((res) => {
 				noteStoreTemp.notes = res;
-				this.setState({ store: noteStoreTemp, noteId: res[res.length - 1].id });
+				this.setState({ store: noteStoreTemp});
 			})
 			.catch((err) => console.log('notes', err));
 	}
@@ -82,12 +82,15 @@ class App extends React.Component {
 	};
 	//filters the note that belong in the specified folder upon clicking
 	displayNotes = (context, props) => {
-		let NewNotes = context.store.notes;
+		let NewNotes =  context.store.notes
+		
+		//console.log(context);
 		//if there is an id available
 		if (props.match.params.id) {
-			NewNotes = NewNotes.filter((note) => note.folderId === props.match.params.id);
-		}
 
+			NewNotes = NewNotes.filter((note) => note.folders === Number(props.match.params.id));
+		}
+		console.log(NewNotes);
 		return (
 			<div>
 				{NewNotes.map((note, i) => (
@@ -106,16 +109,13 @@ class App extends React.Component {
 
 	//add note function
 	addNotes = (folderName, Note, noteName) => {
-		if (this.state.noteId === '') {
-			this.setState({ noteId: 'd78972dha644654684247' });
-		}
+		
 
-		const noteObj = {
-			id       : `${this.state.noteId}1`,
-			name     : noteName,
+		const noteObj = {			
+			title     : noteName,
 			modified : this.date(),
-			folderId : folderName,
-			content  : Note
+			folders : Number(folderName),
+			note : Note
 		};
 		const { notes } = this.state.store;
 		const { store } = this.state;
@@ -125,7 +125,7 @@ class App extends React.Component {
 		];
 		store.notes = newNotes;
 		this.setState({ store: store, noteId: `${this.state.noteId}1` });
-		fetch(`${url}/notes`, {
+		fetch(`${url}notes`, {
 			method  : 'POST',
 			body    : JSON.stringify(noteObj),
 			headers : {
@@ -150,7 +150,7 @@ class App extends React.Component {
 	addFolder = (name) => {
 		const folderObj = {
 			id   : `${this.state.folderId}2`,
-			name : name
+			title : name
 		};
 		const { folders } = this.state.store;
 		const { store } = this.state;
@@ -160,7 +160,7 @@ class App extends React.Component {
 		];
 		store.folders = newFolder;
 		this.setState({ store: store, folderId: `${this.state.folderId}2` });
-		fetch(`${url}/folders`, {
+		fetch(`${url}folders`, {
 			method  : 'POST',
 			body    : JSON.stringify(folderObj),
 			headers : {
@@ -176,7 +176,7 @@ class App extends React.Component {
 
 		store.notes = newNotes;
 		this.setState({ store: store });
-		fetch(`${url}/notes/${noteId}`, {
+		fetch(`${url}notes/${noteId}`, {
 			method  : 'DELETE',
 			headers : {
 				'content-type' : 'application/json'

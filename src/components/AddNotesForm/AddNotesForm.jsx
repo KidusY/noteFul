@@ -45,7 +45,7 @@ class AddNoteForm extends React.Component {
 								<select name='folderSelection' id='folderSelection' required>
 									{context.store.folders.map((folder, i) => (
 										<option key={i} value={folder.id}>
-											{folder.name}
+											{folder.title}
 										</option>
 									))}
 								</select>

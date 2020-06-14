@@ -7,10 +7,10 @@ import './NotesPages-style.css';
 const NotePage = (props) => {
 	return (
 		<div key={props.keys} className='notes'>
-			{console.log(props)}
+		
 			<Link to={`/note/${props.note.id}`} className='info' style={{ textDecoration: 'none', color: 'black' }}>
 				<div>
-					<h2>{props.note.name} </h2>
+					<h2>{props.note.title} </h2>
 					<div>Date modified on {props.note.modified}</div>
 				</div>
 			</Link>

@@ -18,8 +18,9 @@ const SideBar = (props) => {
 	return (
 		<Link to={`/${props.folder.id}`} style={{ textDecoration: 'none' }}>
 			<div className='card' key={props.folder.id} style={style}>
+		
 				<img src={folderIcon} alt='folderIcon' style={{ width: '40px' }} />
-				<h2 style={styleH2}>{props.folder.name}</h2>
+				<h3 style={styleH2}>{props.folder.title}</h3>
 			</div>
 		</Link>
 	);

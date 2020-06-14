@@ -8,12 +8,14 @@ import AddFolder from '../AddFolderFrom/AddFolder';
 
 const NoteList = (props) => (
 	<ErrorBoundary>
+	
 		
 		<NoteContext.Consumer>
 			{(context) => (
 				<div className='container'>
+				
 					<div className='folders'>
-						{context.store.folders.map((folder, i) => {
+						{context.store.folders.map((folder, i) => {						
 							return <SideBar folder={folder} key={i} link={props.match.params.id} />;
 						})}
 						<div className='btn-addFolder' onClick={() => context.setAddFormVisible('addForm')}>
