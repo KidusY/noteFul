@@ -6,8 +6,11 @@ import PropTypes from 'prop-types';
 
 const Note = (props) => (
 	<NoteContext.Consumer>
-		{(context) => {			
-			const note = context.store.notes.find((note) => note.id === Number(props.match.params.id));			
+		{(context) => {	
+			
+
+
+			const note = context.store.notes.find((note) => Number(note.id) === Number(props.match.params.id));			
 			if (!note) {				
 				props.history.push('/');
 				return <div />;
@@ -24,13 +27,14 @@ const Note = (props) => (
 							<div className='notesInfo'>
 								<div>
 									<h2>{note.title} </h2>
-									Date modified on {note.modified}
+									Date modified on {note.modified.toUTCString()}
 								</div>
 								<div>
 									<button
 										className='btn-Edit'
 										onClick={() => {
-											context.getEditNoteInfo(note.name, note.id, note.content);
+											
+											context.getEditNoteInfo(note.title, note.id, note.note);
 											context.setAddFormVisible('addEditNotes');
 										}}
 									>
@@ -57,6 +61,6 @@ const Note = (props) => (
 Note.propTypes = {
 	history: PropTypes.object,
 	location:PropTypes.object,
-	match:PropTypes.object
+	match:PropTypes.object.isRequired
  }
 export default Note;

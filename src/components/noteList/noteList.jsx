@@ -12,8 +12,7 @@ const NoteList = (props) => (
 		
 		<NoteContext.Consumer>
 			{(context) => (
-				<div className='container'>
-				
+				<div className='container'>				
 					<div className='folders'>
 						{context.store.folders.map((folder, i) => {						
 							return <SideBar folder={folder} key={i} link={props.match.params.id} />;
@@ -31,9 +30,9 @@ const NoteList = (props) => (
 );
 
 NoteList.propTypes = {
-	history: PropTypes.object,
-	location:PropTypes.object,
-	match:PropTypes.object
+	history: PropTypes.object.isRequired,
+	location:PropTypes.object.isRequired,
+	match:PropTypes.object.isRequired
  }
 
 

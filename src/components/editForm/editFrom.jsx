@@ -1,5 +1,6 @@
 import React from 'react';
 import NoteContext from '../../noteContext';
+import PropTypes from 'prop-types';
 import './editFrom-style.css';
 
 const EditFrom = (props) => {
@@ -10,11 +11,12 @@ const EditFrom = (props) => {
 					className='editNotes'
 					onSubmit={(e) => {
 						e.preventDefault();
-						context.editNote(document.querySelector('#notesAdded').value, props.noteId);
+						context.editNote(document.querySelector('#noteTitle').value,document.querySelector('#notesAdded').value, props.noteId);
 
 						context.setAddFormVisible('addEditNotes');
 					}}
 				>
+				
 					<input id='noteTitle' defaultValue={props.name} />
 					<textarea id='notesAdded' defaultValue={props.noteContent} required />
 					<div style={{ display: 'flex', justifyContent: 'space-evenly' }}>
@@ -29,5 +31,15 @@ const EditFrom = (props) => {
 		</NoteContext.Consumer>
 	);
 };
+
+EditFrom.propTypes= {
+	props: PropTypes.shape({
+		name: PropTypes.string.isRequired,
+		noteContent: PropTypes.string.isRequired,
+		noteId:PropTypes.number.isRequired
+	})
+}
+
+
 
 export default EditFrom;

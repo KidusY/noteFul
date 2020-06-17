@@ -12,36 +12,34 @@ import './App.css';
 
 const url = Url.url;
 class App extends React.Component {
-	constructor () {
+	constructor() {
 		super();
 		this.state = {
-			store         : {
-				folders : [],
-				notes   : []
+			store: {
+				folders: [],
+				notes: []
 			},
-			addFolderForm : false,
-			addNoteForm   : false,
-			addEditNotes  : false,
-			noteId        : '',
-			folderId      : '',
-			noteInfo      : {},
-			noteName      : 'Untitled',
-			folderName    : 'Untitled'
+			addFolderForm: false,
+			addNoteForm: false,
+			addEditNotes: false,
+
+			noteInfo: {},
+			noteName: 'Untitled',
+			folderName: 'Untitled'
 		};
 	}
 	//get note data
-	componentDidMount () {
+	componentDidMount() {
 		const noteStoreTemp = { folders: [], notes: [] };
 		fetch(`${url}/folders`)
 			.then((res) => {
 				if (res.ok) {
 					return res.json();
-				}
-				else {
+				} else {
 					throw new Error('No file found');
 				}
 			})
-			.then((res) => {				
+			.then((res) => {
 				noteStoreTemp.folders = res;
 				this.setState({ store: noteStoreTemp });
 			})
@@ -50,14 +48,13 @@ class App extends React.Component {
 			.then((res) => {
 				if (res.ok) {
 					return res.json();
-				}
-				else {
+				} else {
 					throw new Error('No file found');
 				}
 			})
 			.then((res) => {
 				noteStoreTemp.notes = res;
-				this.setState({ store: noteStoreTemp});
+				this.setState({ store: noteStoreTemp });
 			})
 			.catch((err) => console.log('notes', err));
 	}
@@ -82,15 +79,14 @@ class App extends React.Component {
 	};
 	//filters the note that belong in the specified folder upon clicking
 	displayNotes = (context, props) => {
-		let NewNotes =  context.store.notes
-		
+		let NewNotes = context.store.notes;
+
 		//console.log(context);
 		//if there is an id available
 		if (props.match.params.id) {
-
 			NewNotes = NewNotes.filter((note) => note.folders === Number(props.match.params.id));
 		}
-		console.log(NewNotes);
+	
 		return (
 			<div>
 				{NewNotes.map((note, i) => (
@@ -109,27 +105,22 @@ class App extends React.Component {
 
 	//add note function
 	addNotes = (folderName, Note, noteName) => {
-		
-
-		const noteObj = {			
-			title     : noteName,
-			modified : this.date(),
-			folders : Number(folderName),
-			note : Note
+		const noteObj = {
+			title: noteName,
+			modified: this.date(),
+			folders: Number(folderName),
+			note: Note
 		};
 		const { notes } = this.state.store;
 		const { store } = this.state;
-		const newNotes = [
-			...notes,
-			noteObj
-		];
+		const newNotes = [ ...notes, noteObj ];
 		store.notes = newNotes;
-		this.setState({ store: store, noteId: `${this.state.noteId}1` });
+		this.setState({ store: store });
 		fetch(`${url}notes`, {
-			method  : 'POST',
-			body    : JSON.stringify(noteObj),
-			headers : {
-				'content-type' : 'application/json'
+			method: 'POST',
+			body: JSON.stringify(noteObj),
+			headers: {
+				'content-type': 'application/json'
 			}
 		});
 	};
@@ -138,33 +129,28 @@ class App extends React.Component {
 	setAddFormVisible = (Form) => {
 		if (Form === 'addForm') {
 			this.setState({ addFolderForm: !this.state.addFolderForm });
-		}
-		else if (Form === 'addFromNotes') {
+		} else if (Form === 'addFromNotes') {
 			this.setState({ addNoteForm: !this.state.addNoteForm });
-		}
-		else if (Form === 'addEditNotes') {
+		} else if (Form === 'addEditNotes') {
 			this.setState({ addEditNotes: !this.state.addEditNotes });
 		}
 	};
 	//add folders
 	addFolder = (name) => {
 		const folderObj = {
-			id   : `${this.state.folderId}2`,
-			title : name
+			id: `${this.state.folderId}2`,
+			title: name
 		};
 		const { folders } = this.state.store;
 		const { store } = this.state;
-		const newFolder = [
-			...folders,
-			folderObj
-		];
+		const newFolder = [ ...folders, folderObj ];
 		store.folders = newFolder;
 		this.setState({ store: store, folderId: `${this.state.folderId}2` });
 		fetch(`${url}folders`, {
-			method  : 'POST',
-			body    : JSON.stringify(folderObj),
-			headers : {
-				'content-type' : 'application/json'
+			method: 'POST',
+			body: JSON.stringify(folderObj),
+			headers: {
+				'content-type': 'application/json'
 			}
 		});
 	};
@@ -177,63 +163,89 @@ class App extends React.Component {
 		store.notes = newNotes;
 		this.setState({ store: store });
 		fetch(`${url}notes/${noteId}`, {
-			method  : 'DELETE',
-			headers : {
-				'content-type' : 'application/json'
+			method: 'DELETE',
+			headers: {
+				'content-type': 'application/json'
 			}
-		}).then((res) => console.log(res));
+		}).catch(err=>console.log(err));
 	};
 	//gets the info needed for editing notes from  the NotePages component
 	getEditNoteInfo = (name, id, content) => {
 		const NoteContent = { Name: name, Id: id, Content: content };
+		console.log(name);
 		this.setState({ noteInfo: NoteContent });
 	};
 
 	//edit notes
-	editNote = (noteContent, id) => {
+	editNote = (noteTitle,noteContent, id) => {
+		
 		const { store } = this.state;
+		let noteTobeEdited = store.notes;
+		let folderId;
+		console.log(noteTitle,noteContent,id)
 
-		const noteEdited = this.state.store.notes.map((note) => {
-			if (note.id === id) {
-				note.content = noteContent;
-				return note;
+	noteTobeEdited = noteTobeEdited.map(note=>{
+			if(note.id===id){
+				folderId = note.folders;
+				note.title = noteTitle;
+				note.modified = this.date();
+				note.note = noteContent;					
 			}
-			return note;
+			return note;			
+		})
+
+		console.log(noteTobeEdited);
+	
+		const noteObj={
+			title:noteTitle,
+			note:noteContent,
+			modified: new Date(),
+			folders:folderId
+
+		}
+		fetch(`${url}notes/${id}`, {
+			method: 'PATCH',
+			body: JSON.stringify(noteObj),
+			headers: {
+				'content-type': 'application/json'
+			}
 		});
-		store.notes = noteEdited;
-		this.setState({ store: store });
+
+		this.setState()
+
 	};
 
-	render () {
+	render() {
 		const value = {
-			store             : this.state.store,
-			displayNotes      : this.displayNotes,
-			addForm           : this.state.addFolderForm,
-			addNotes          : this.addNotes,
-			setAddFormVisible : this.setAddFormVisible,
-			addFolder         : this.addFolder,
-			addNoteForm       : this.state.addNoteForm,
-			deleteNote        : this.deleteNote,
-			addEditNotes      : this.state.addEditNotes,
-			editNote          : this.editNote,
-			getEditNoteInfo   : this.getEditNoteInfo,
-			NoteName          : this.state.noteName,
-			folderName        : this.state.folderName
+			store: this.state.store,
+			displayNotes: this.displayNotes,
+			addForm: this.state.addFolderForm,
+			addNotes: this.addNotes,
+			setAddFormVisible: this.setAddFormVisible,
+			addFolder: this.addFolder,
+			addNoteForm: this.state.addNoteForm,
+			deleteNote: this.deleteNote,
+			addEditNotes: this.state.addEditNotes,
+			editNote: this.editNote,
+			getEditNoteInfo: this.getEditNoteInfo,
+			NoteName: this.state.noteName,
+			folderName: this.state.folderName,
+			date: this.date
 		};
 
 		return (
 			<NoteContext.Provider value={value}>
 				<ErrorBoundary>
-					<div className='App'>
+					<div className="App">
 						<Header />
 						<section>
 							<Switch>
 								{/*Home page */}
-								<Route exact path='/' component={(props) => <NotesList {...props} />} />
+								<Route exact path="/" component={(props) => <NotesList {...props} />} />
 								{/*other pages */}
-								<Route exact path='/:id' component={(props) => <NotesList {...props} />} />
+								<Route exact path="/:id" component={(props) => <NotesList {...props} />} />
 								{/*displays the notes */}
-								<Route exact path='/note/:id' component={(props) => <Note {...props} />} />
+								<Route exact path="/note/:id" component={(props) => <Note {...props} />} />
 							</Switch>
 						</section>
 						{this.state.addEditNotes && (
