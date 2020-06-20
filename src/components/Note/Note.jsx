@@ -26,8 +26,9 @@ const Note = (props) => (
 						<div className='notesHeader'>
 							<div className='notesInfo'>
 								<div>
+								
 									<h2>{note.title} </h2>
-									Date modified on {note.modified.toUTCString()}
+									Date modified on {new Date(note.modified).toUTCString()}
 								</div>
 								<div>
 									<button
